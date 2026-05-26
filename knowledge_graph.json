@@ -1,0 +1,108 @@
+{
+  "tools": {
+    "web_search": {
+      "description": "Search the internet for current or unknown information",
+      "use_when": [
+        "need recent or real-time information",
+        "fact-checking a claim",
+        "researching an unfamiliar topic",
+        "finding URLs, docs, or references"
+      ],
+      "avoid_when": [
+        "information is already known",
+        "task is purely computational"
+      ],
+      "outputs": "text snippets with source URLs",
+      "related_tools": ["read_file", "write_file"],
+      "example_tasks": ["What is the latest version of Python?", "Find documentation for smolagents"]
+    },
+    "code_execution": {
+      "description": "Write and run Python code to compute, transform, or automate",
+      "use_when": [
+        "math or data computation",
+        "string manipulation or formatting",
+        "automating repetitive operations",
+        "parsing structured data (JSON, CSV, XML)",
+        "interacting with the OS or filesystem"
+      ],
+      "avoid_when": [
+        "a simpler tool already handles the task",
+        "task requires only lookup, not computation"
+      ],
+      "outputs": "stdout output or computed result",
+      "related_tools": ["read_file", "write_file"],
+      "example_tasks": ["Calculate the sum of a list", "Parse a JSON file and extract fields"]
+    },
+    "read_file": {
+      "description": "Read the contents of a local file",
+      "use_when": [
+        "need to inspect a local file",
+        "loading context or data from disk",
+        "reading config, logs, or data files"
+      ],
+      "outputs": "file contents as text",
+      "related_tools": ["write_file", "code_execution"],
+      "example_tasks": ["Read config.json", "Load data from output/results.txt"]
+    },
+    "write_file": {
+      "description": "Write or save text content to a local file",
+      "use_when": [
+        "saving results or reports",
+        "persisting data for later use",
+        "creating output files"
+      ],
+      "outputs": "confirmation message",
+      "related_tools": ["read_file", "code_execution"],
+      "example_tasks": ["Save research summary to report.txt", "Write generated code to script.py"]
+    }
+  },
+  "concepts": {
+    "agent_loop": {
+      "description": "The internal cycle where the agent reasons, picks a tool, executes it, observes the result, and repeats until the task is done or max_steps is reached",
+      "related_to": ["planning", "tool_selection", "observation"]
+    },
+    "planning": {
+      "description": "Breaking a complex task into ordered steps before executing",
+      "related_to": ["agent_loop", "task_decomposition"]
+    },
+    "task_decomposition": {
+      "description": "Splitting a high-level goal into smaller, actionable subtasks",
+      "related_to": ["planning", "agent_loop"]
+    },
+    "observation": {
+      "description": "The result returned by a tool after execution; informs the next step",
+      "related_to": ["agent_loop", "tool_selection"]
+    },
+    "tool_selection": {
+      "description": "Choosing the right tool for each step based on the current goal and observations",
+      "related_to": ["agent_loop", "planning"]
+    }
+  },
+  "task_patterns": {
+    "research_and_report": {
+      "description": "Research a topic and save a written summary",
+      "steps": ["web_search", "web_search (follow-up)", "code_execution (summarize/format)", "write_file"],
+      "example": "Research the history of transformers in NLP and save a report"
+    },
+    "data_processing": {
+      "description": "Load a data file, process it with code, and save results",
+      "steps": ["read_file", "code_execution", "write_file"],
+      "example": "Read sales.csv, compute totals, save summary.txt"
+    },
+    "fact_check": {
+      "description": "Verify a claim using web search",
+      "steps": ["web_search", "code_execution (compare/reason)"],
+      "example": "Is Python 3.13 the latest stable release?"
+    },
+    "code_generation": {
+      "description": "Write and optionally test code for a given task",
+      "steps": ["code_execution (write)", "code_execution (test/run)", "write_file"],
+      "example": "Write a Python script to rename all files in a folder"
+    },
+    "file_inspection": {
+      "description": "Read a file and answer questions about its contents",
+      "steps": ["read_file", "code_execution (parse/analyze)"],
+      "example": "What keys are in this JSON file?"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.venv/
+venv/
+.env
+
+# Runtime state (not source)
+memory.json
+evaluation_report.txt
+exchange_rates.txt
+output/
+.agent/
+
+# Tool-specific
+.agents/
+.claude/

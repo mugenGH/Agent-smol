@@ -1,0 +1,62 @@
+{
+  "model": {
+    "provider": "llmacpp",
+    "name": "qwen3",
+    "api_base": "http://10.17.0.225:8000/v1",
+    "api_key": "not-needed"
+  },
+  "agent": {
+    "max_steps": 10,
+    "stream_outputs": true
+  },
+  "memory": {
+    "max_short_term": 10,
+    "min_score_to_store": 0.6,
+    "top_k_retrieval": 3,
+    "embedding_model": "all-MiniLM-L6-v2"
+  },
+  "evaluation": {
+    "min_pass_score": 0.5,
+    "max_retries": 2
+  },
+  "perception": {
+    "use_llm": true
+  },
+  "guards": {
+    "max_consecutive_errors": 5,
+    "max_identical_streak": 4,
+    "max_parse_streak": 3,
+    "write_thrash_threshold": 4,
+    "failure_rate_window": 10,
+    "failure_rate_threshold": 0.6
+  },
+  "stages": {
+    "enabled": true
+  },
+  "compaction": {
+    "max_turns": 20,
+    "keep_recent": 6
+  },
+  "verification": {
+    "enabled": true,
+    "require_smoke_test": false,
+    "min_result_words": 5
+  },
+  "a2a": {
+    "enabled": true
+  },
+  "token_budget": {
+    "max_tokens": 32000,
+    "warn_threshold": 0.8
+  },
+  "critic": {
+    "n_samples": 2,
+    "pass_avg": 3.0,
+    "temperature": 0.7
+  },
+  "evaluation_complexity": {
+    "max_retries_simple": 1,
+    "max_retries_moderate": 2,
+    "max_retries_complex": 4
+  }
+}
